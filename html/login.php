@@ -24,7 +24,8 @@ if (isset($_POST["login"])) {
             // クエリ発行
             $obj = new connect();
             $sql = 'SELECT * FROM user WHERE email = ?';
-            $param = $email;
+            //$param = $email;
+            $param = array($email);
             $stmt = $obj->plural($sql, $param);
 
             $password = $_POST["password"];

@@ -7,6 +7,24 @@ require_once '../connect.php';
 $errorMessage = "";
 
 if( isset($_SESSION['user']) ){
+
+    if( isset($_POST['ins_comment']) ){
+      // コメントが投稿された場合
+      $obj0 = new connect();
+
+      $sql_i = 'INSERT INTO ';
+      $sql_i .= '   comment ';
+      $sql_i .= '   VALUES( ';
+      $sql_i .= '   0';    // id ※DB側で自動採番される
+      $sql_i .= '   ,? ';  // content
+      $sql_i .= '   ,? ';  // post_id
+      $sql_i .= '   ,? ';  // user_id
+      $sql_i .= '   ) ';
+
+      $param_i = array($_POST['comment_input'], $_POST['post_id'], $_SESSION['user']);
+      $ret = $obj0->plural($sql_i, $param_i);
+    }
+
     try{
 
         // 1. 投稿情報取得
@@ -27,7 +45,8 @@ if( isset($_SESSION['user']) ){
         $sql_p .= 'WHERE ';
         $sql_p .= '   p.id = ? ';
 
-        $param_p = $_POST['post_id'];
+        //$param_p = $_POST['post_id'];
+        $param_p = array($_POST['post_id']);
         $stmt_p = $obj->plural($sql_p, $param_p);
         $row_p = $stmt_p->fetch(PDO::FETCH_ASSOC);
 
@@ -48,7 +67,8 @@ if( isset($_SESSION['user']) ){
         $sql_c .= 'WHERE ';
         $sql_c .= '   c.post_id = ? ';
 
-        $param_c = $_POST['post_id'];
+        //$param_c = $_POST['post_id'];
+        $param_c = array($_POST['post_id']);
         $stmt_c = $obj->plural($sql_c, $param_c);
 
     }catch(PDOException $e){
@@ -57,6 +77,10 @@ if( isset($_SESSION['user']) ){
         // $e->getMessage() でエラー内容を参照可能（デバッグ時のみ表示）
         // echo $e->getMessage();
     }
+}
+
+function insComment(){
+  echo "test";
 }
 ?>
 
@@ -128,6 +152,13 @@ if( isset($_SESSION['user']) ){
           </table>
         </form>
       <?php endforeach ?>
+
+      <form id="insCommentForm" name="insCommentForm" action="" method="post">
+        <p>コメント投稿欄</p>
+        <textarea name="comment_input" id="comment_input" cols="30" rows="10"></textarea>
+        <input type="submit" id="ins_comment" name="ins_comment" value="投稿">
+        <input type="hidden" id="post_id" name="post_id" value="<?php echo $_POST['post_id'] ?>">
+      </form>
     </body>
 
 

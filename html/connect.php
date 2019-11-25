@@ -38,7 +38,8 @@ class connect{
         $hoge=$this->pdo();
         $stmt=$hoge->prepare($sql);
         //$stmt->execute(array(':id'=>$item));//sql文のVALUES等の値が?の場合は$itemでもいい。
-        $stmt->execute(array($item));
+        //$stmt->execute(array($item));
+        $stmt->execute($item);
         return $stmt;
     }
 }
