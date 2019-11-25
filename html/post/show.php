@@ -79,16 +79,13 @@ if( isset($_SESSION['user']) ){
     }
 }
 
-function insComment(){
-  echo "test";
-}
 ?>
 
 <!doctype html>
 <html>
     <head>
       <meta charset="UTF-8">
-      <title>投稿一覧</title>
+      <title>投稿表示</title>
       <script type="text/javascript">
         function submit(formName){
           var target = document.getElementById(formName);
@@ -120,12 +117,15 @@ function insComment(){
             <td><label for="content">本文</label></td>
             <td><input type="text" id="content" name="content" value="<?php echo $content = $row_p['content'] ?>"></td>
           </tr>
-          <tr>
-            <td>********************</td>
-            <td>****************************************</td>
-          </tr>
         </table>
       </form>
+
+      <form id="toEdit" name="toEdit" action="edit.php" method="post">
+        <input type="hidden" id="post_id" name="post_id" value="<?php echo $_POST['post_id'] ?>">
+        <input type="submit" id="edit" name="edit" value="編集する">
+      </form>
+
+      <p>****************************************************</p>
 
       <?php foreach($rows_c = $stmt_c->fetchAll(PDO::FETCH_ASSOC) as $row_c): ?>
         <form id="commentUser" name="commentUser" action="../user/show.php" method="post">
@@ -145,11 +145,8 @@ function insComment(){
               <td><label for="content">コメント</label></td>
               <td><input type="text" id="content" name="content" value="<?php echo $content = $row_c['content'] ?>"></td>
             </tr>
-            <tr>
-              <td>--------------------</td>
-              <td>----------------------------------------</td>
-            </tr>
           </table>
+          <p>---------------------------------------------------------</p>
         </form>
       <?php endforeach ?>
 
