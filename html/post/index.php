@@ -53,7 +53,11 @@ if( isset($_SESSION['user']) ){
             <p><button type="submit" id="post_create" name="post_create">投稿する（暫定の配置）</button></p>
         </form>
 
-        <?php foreach($items as $row): ?>            
+        <form id="tmpLogout" name="tmpLogout" action="../login.php" method="post">
+            <p><button type="submit" id="logout" name="logout">ログアウト（暫定の配置）</button></p>
+        </form>
+
+        <?php foreach($items as $row): ?>
             <form id="toUserShow" name="toUserShow" action="../user/show.php" method="post">
                 <table>
                     <tr>
@@ -71,7 +75,7 @@ if( isset($_SESSION['user']) ){
                         <td><label for="image">ユーザのイメージ</label></td>
                         <td><input type="text" id="image" name="image" value="<?php echo $image = $row['image'] ?>"></td>
                     </tr>
-                </table>    
+                </table>
             </form>
             <form id="toPostShow" name="toPostShow" action="show.php" method="post">
                 <table>

@@ -57,6 +57,13 @@ if (isset($_POST["login"])) {
 
 }
 
+if( isset($_POST['logout']) ){
+  // ログアウトされた場合セッションを破棄
+  $_SESSION = array();
+  session_destroy();
+  echo "ログアウトしました";
+}
+
 ?>
 
 
@@ -80,7 +87,7 @@ if (isset($_POST["login"])) {
             </fieldset>
         </form>
         <br>
-        <form action="SignUp.php">
+        <form action="user/create.php">
             <fieldset>
                 <legend>新規登録フォーム</legend>
                 <input type="submit" value="新規登録">
