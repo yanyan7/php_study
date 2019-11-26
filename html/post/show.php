@@ -96,31 +96,31 @@ if( isset($_SESSION['user']) ){
     </head>
 
     <body>
-      <form id="postUser" name="commentUser" action="../user/show.php" method="post">
+      <form id="toUserShow" name="toUserShow" action="../user/show.php" method="post">
         <table>
           <tr>
             <td><label for="user_id">投稿ユーザID</label></td>
-            <td><input type="text" id="user_id" name="user_id" value="<?php echo $user_id = $row_p['user_id'] ?>"></td>
+            <td><input type="text" id="user_id" name="user_id" value="<?php echo $row_p['user_id'] ?>"></td>
           </tr>
           <tr>
             <td><label for="name">投稿ユーザ名</label></td>
             <td>
-              <input type="text" id="name" name="name" value="<?php echo $name = $row_p['name'] ?>"
-              onclick="submit('postUser')">
+              <input type="text" id="name" name="name" value="<?php echo $row_p['name'] ?>"
+              onclick="submit('toUserShow')">
             </td>
           </tr>
           <tr>
             <td><label for="title">タイトル</label></td>
-            <td><input type="text" id="title" name="title" value="<?php echo $title = $row_p['title'] ?>"></td>
+            <td><input type="text" id="title" name="title" value="<?php echo $row_p['title'] ?>"></td>
           </tr>
           <tr>
             <td><label for="content">本文</label></td>
-            <td><input type="text" id="content" name="content" value="<?php echo $content = $row_p['content'] ?>"></td>
+            <td><textarea name="content" id="content" cols="30" rows="10"><?php echo $row_p['content'] ?></textarea></td>
           </tr>
         </table>
       </form>
 
-      <form id="toEdit" name="toEdit" action="edit.php" method="post">
+      <form id="toPostEdit" name="toPostEdit" action="edit.php" method="post">
         <input type="hidden" id="post_id" name="post_id" value="<?php echo $_POST['post_id'] ?>">
         <input type="submit" id="edit" name="edit" value="編集する">
       </form>
@@ -128,22 +128,24 @@ if( isset($_SESSION['user']) ){
       <p>****************************************************</p>
 
       <?php foreach($rows_c = $stmt_c->fetchAll(PDO::FETCH_ASSOC) as $row_c): ?>
-        <form id="commentUser" name="commentUser" action="../user/show.php" method="post">
+        <form id="toUserShow" name="toUserShow" action="../user/show.php" method="post">
           <table>
             <tr>
               <td><label for="user_id">コメント投稿ユーザID</label></td>
-              <td><input type="text" id="user_id" name="user_id" value="<?php echo $user_id = $row_c['user_id'] ?>"></td>
+              <td><input type="text" id="user_id" name="user_id" value="<?php echo $row_c['user_id'] ?>"></td>
             </tr>
             <tr>
               <td><label for="name">コメント投稿ユーザ名</label></td>
               <td>
-                <input type="text" id="name" name="name" value="<?php echo $name = $row_c['name'] ?>"
-                onclick="submit('commentUser')">
+                <input type="text" id="name" name="name" value="<?php echo $row_c['name'] ?>"
+                onclick="submit('toUserShow')">
               </td>
             </tr>
             <tr>
               <td><label for="content">コメント</label></td>
-              <td><input type="text" id="content" name="content" value="<?php echo $content = $row_c['content'] ?>"></td>
+              <td>
+                <textarea name="content" id="content" cols="30" rows="10"><?php echo $row_c['content'] ?></textarea>
+              </td>
             </tr>
           </table>
           <p>---------------------------------------------------------</p>
