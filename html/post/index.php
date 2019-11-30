@@ -3,36 +3,49 @@ session_start();  //セッション開始
 
 require_once '../connect.php';
 
+if( isset($_POST['logout']) ){
+  // ログアウトが押された場合
+  $_SESSION = array();
+  session_destroy();
+}
+
+if( isset($_SESSION['user']) ){
+    // ログイン済みの場合表示するヘッダ
+    include('../global_menu.php');
+}else{
+    // 未ログインの場合表示するヘッダ
+    include('../global_menu_bef_login.php');
+}
+
 // エラーメッセージの初期化
 $errorMessage = "";
 
-if( isset($_SESSION['user']) ){
-    try{
-        // クエリ発行
-        $obj = new connect();
+  try{
+      // クエリ発行
+      $obj = new connect();
 
-        $sql =  'SELECT ';
-        $sql .=     'p.id as post_id ';
-        $sql .=     ',p.title as title ';
-        $sql .=     ',u.id as user_id ';
-        $sql .=     ',u.name as name ';
-        $sql .=     ',u.image as image ';
-        $sql .= 'FROM ';
-        $sql .=     'post p ';
-        $sql .= 'left join ';
-        $sql .=     'user u ';
-        $sql .=     'on ';
-        $sql .=     'p.user_id = u.id ';
+      $sql =  'SELECT ';
+      $sql .=     'p.id as post_id ';
+      $sql .=     ',p.title as title ';
+      $sql .=     ',u.id as user_id ';
+      $sql .=     ',u.name as name ';
+      $sql .=     ',u.image as image ';
+      $sql .= 'FROM ';
+      $sql .=     'post p ';
+      $sql .= 'left join ';
+      $sql .=     'user u ';
+      $sql .=     'on ';
+      $sql .=     'p.user_id = u.id ';
 
-        $items = $obj->select($sql);
+      $items = $obj->select($sql);
 
-    }catch(PDOException $e){
-        $errorMessage = 'データベースエラー';
-        //$errorMessage = $sql;
-        // $e->getMessage() でエラー内容を参照可能（デバッグ時のみ表示）
-        // echo $e->getMessage();
-    }
-}
+  }catch(PDOException $e){
+      $errorMessage = 'データベースエラー';
+      //$errorMessage = $sql;
+      // $e->getMessage() でエラー内容を参照可能（デバッグ時のみ表示）
+      // echo $e->getMessage();
+  }
+
 ?>
 
 <!doctype html>
@@ -49,14 +62,6 @@ if( isset($_SESSION['user']) ){
         </script>
     </head>
     <body>
-        <form id="tmpToPostCreate" name="tmpToPostCreate" action="create.php" method="post">
-            <p><button type="submit" id="post_create" name="post_create">投稿する（暫定の配置）</button></p>
-        </form>
-
-        <form id="tmpLogout" name="tmpLogout" action="../login.php" method="post">
-            <p><button type="submit" id="logout" name="logout">ログアウト（暫定の配置）</button></p>
-        </form>
-
         <?php foreach($items as $row): ?>
             <form id="toUserShow" name="toUserShow" action="../user/show.php" method="post">
                 <table>
@@ -71,10 +76,12 @@ if( isset($_SESSION['user']) ){
                             onclick="submit('toUserShow')">
                         </td>
                     </tr>
+                    <!--
                     <tr>
                         <td><label for="image">ユーザのイメージ</label></td>
                         <td><input type="text" id="image" name="image" value="<?php echo $image = $row['image'] ?>"></td>
                     </tr>
+                    -->
                 </table>
             </form>
             <form id="toPostShow" name="toPostShow" action="show.php" method="post">

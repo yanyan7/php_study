@@ -2,6 +2,7 @@
 session_start();  //セッション開始
 
 require_once '../connect.php';
+include('../global_menu.php');
 
 // エラーメッセージの初期化
 $errorMessage = "";
@@ -11,7 +12,7 @@ if( isset($_SESSION['user']) ){
         if( isset($_POST['create_post']) ){
             // 投稿ボタンが押された場合
             $obj = new connect();
-      
+
             $sql =  'INSERT INTO ';
             $sql .= 'post ';
             $sql .= 'VALUES( ';
@@ -20,7 +21,7 @@ if( isset($_SESSION['user']) ){
             $sql .= '   ,? ';
             $sql .= '   ,? ';
             $sql .= ') ';
-      
+
             $param = array($_POST['title'], $_POST['content'], $_SESSION['user']);
             $ret = $obj->plural($sql, $param);
         }

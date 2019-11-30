@@ -2,6 +2,7 @@
 session_start();  //セッション開始
 
 require_once '../connect.php';
+include('../global_menu_bef_login.php');  // 未ログインの場合表示するヘッダ
 
 // エラーメッセージの初期化
 $errorMessage = "";
@@ -13,7 +14,7 @@ if( isset($_SESSION['user']) ){
 
 }else {
   $class = "";  // 入力フォームを表示する
-  
+
     try{
         if( isset($_POST['create_user']) ){
             // 投稿ボタンが押された場合

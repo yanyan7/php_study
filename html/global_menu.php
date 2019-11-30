@@ -1,7 +1,5 @@
 <?php
 
-$webroot = $_SERVER['DOCUMENT_ROOT'];
-
 try{
     // ユーザ情報取得
     // クエリ発行
@@ -35,15 +33,15 @@ try{
     </title>
   </head>
   <body>
-    <form id="toTop" name="toTop" action="<?php echo $webroot.'/post/index.php' ?>" method="post">
+    <form id="toTop" name="toTop" action="<?php echo '/post/index.php' ?>" method="post">
       <input type="submit" id="top" name="top" value="トップに戻る">
     </form>
 
-    <form id="logout" name="logout" action="<?php echo $webroot.'/login.php' ?>" method="post">
+    <form id="logout" name="logout" action="<?php echo '/post/index.php' ?>" method="post">
       <input type="submit" id="logout" name="logout" value="ログアウト">
     </form>
 
-    <form id="toPostCreate" name="toPostCreate" action="<?php echo $webroot.'/post/create.php' ?>" method="post">
+    <form id="toPostCreate" name="toPostCreate" action="<?php echo '/post/create.php' ?>" method="post">
       <input type="submit" id="create" name="create" value="投稿する">
     </form>
 
@@ -52,6 +50,7 @@ try{
       <input type="text" id="name" name="name" value="<?php echo $items['name'] ?>">
     </form>
 
+    <p>***************************************************</p>
 
   </body>
 </html>

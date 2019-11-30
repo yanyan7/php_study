@@ -3,41 +3,48 @@ session_start();  //セッション開始
 
 require_once '../connect.php';
 
+if( isset($_SESSION['user']) ){
+    // ログイン済みの場合表示するヘッダ
+    include('../global_menu.php');
+}else{
+    // 未ログインの場合表示するヘッダ
+    include('../global_menu_bef_login.php');
+}
+
 // エラーメッセージの初期化
 $errorMessage = "";
 
-if( isset($_SESSION['user']) ){
-    try{
-        // クエリ発行
-        $obj = new connect();
+try{
+    // クエリ発行
+    $obj = new connect();
 
-        $sql =  'SELECT ';
-        $sql .=     'p.id as post_id ';
-        $sql .=     ',p.title as title ';
-        $sql .=     ',u.id as user_id ';
-        $sql .=     ',u.name as name ';
-        $sql .=     ',u.image as image ';
-        $sql .=     ',u.introduction as introduction ';
-        $sql .= 'FROM ';
-        $sql .=     'post p ';
-        $sql .= 'left join ';
-        $sql .=     'user u ';
-        $sql .=     'on ';
-        $sql .=     'p.user_id = u.id ';
-        $sql .= 'WHERE ';
-        $sql .=     'u.id = ? ';
+    $sql =  'SELECT ';
+    $sql .=     'p.id as post_id ';
+    $sql .=     ',p.title as title ';
+    $sql .=     ',u.id as user_id ';
+    $sql .=     ',u.name as name ';
+    $sql .=     ',u.image as image ';
+    $sql .=     ',u.introduction as introduction ';
+    $sql .= 'FROM ';
+    $sql .=     'post p ';
+    $sql .= 'left join ';
+    $sql .=     'user u ';
+    $sql .=     'on ';
+    $sql .=     'p.user_id = u.id ';
+    $sql .= 'WHERE ';
+    $sql .=     'u.id = ? ';
 
-        $param = array($_POST['user_id']);
-        $stmt = $obj->plural($sql, $param);
-        $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $param = array($_POST['user_id']);
+    $stmt = $obj->plural($sql, $param);
+    $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    }catch(PDOException $e){
-        $errorMessage = 'データベースエラー';
-        //$errorMessage = $sql;
-        // $e->getMessage() でエラー内容を参照可能（デバッグ時のみ表示）
-        // echo $e->getMessage();
-    }
+}catch(PDOException $e){
+    $errorMessage = 'データベースエラー';
+    //$errorMessage = $sql;
+    // $e->getMessage() でエラー内容を参照可能（デバッグ時のみ表示）
+    // echo $e->getMessage();
 }
+
 ?>
 
 <!doctype html>
@@ -66,16 +73,20 @@ if( isset($_SESSION['user']) ){
                         onclick="submit('user')">
                     </td>
                 </tr>
+                <!--
                 <tr>
                     <td><label for="image">ユーザのイメージ</label></td>
                     <td><input type="text" id="image" name="image" value="<?php echo $items[0]['image'] ?>"></td>
                 </tr>
+                -->
                 <tr>
                     <td><label for="introduction">自己紹介文</label></td>
                     <td><textarea name="introduction" id="introduction" cols="30" rows="10"><?php echo $items[0]['introduction'] ?></textarea></td>
                 </tr>
             </table>
-            <input type="submit" id="edit" name="edit" value="編集する">
+            <?php if( isset($_SESSION['user']) ): ?>
+              <input type="submit" id="edit" name="edit" value="編集する">
+            <?php endif ?>
             <p>************************************************************************</p>
         </form>
 
@@ -93,10 +104,12 @@ if( isset($_SESSION['user']) ){
                             onclick="submit('user')">
                         </td>
                     </tr>
+                    <!--
                     <tr>
                         <td><label for="image">ユーザのイメージ</label></td>
                         <td><input type="text" id="image" name="image" value="<?php echo $row['image'] ?>"></td>
-                    </tr>                
+                    </tr>
+                    -->
                     <tr>
                         <td><label for="post_id">投稿ID</label></td>
                         <td><input type="text" id="post_id" name="post_id" value="<?php echo $row['post_id'] ?>"></td>

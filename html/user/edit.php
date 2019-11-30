@@ -2,6 +2,7 @@
 session_start();  //セッション開始
 
 require_once '../connect.php';
+include('../global_menu.php');
 
 // エラーメッセージの初期化
 $errorMessage = "";
