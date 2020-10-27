@@ -63,7 +63,7 @@ $errorMessage = "";
     </head>
     <body>
         <?php foreach($items as $row): ?>
-            <form id="toUserShow" name="toUserShow" action="../user/show.php" method="post">
+            <form id="userShow" name="userShow" action="../user/show.php" method="get">
                 <table>
                     <tr>
                         <td><label for="user_id">ユーザID</label></td>
@@ -73,7 +73,7 @@ $errorMessage = "";
                         <td><label for="name">ユーザの名前</label></td>
                         <td>
                             <input type="text" id="name" name="name" value="<?php echo $name = $row['name'] ?>"
-                            onclick="submit('toUserShow')">
+                            onclick="submit('userShow')">
                         </td>
                     </tr>
                     <!--
@@ -84,7 +84,7 @@ $errorMessage = "";
                     -->
                 </table>
             </form>
-            <form id="toPostShow" name="toPostShow" action="show.php" method="post">
+            <form id="postShow" name="postShow" action="show.php" method="get">
                 <table>
                     <tr>
                         <td><label for="post_id">投稿ID</label></td>
@@ -94,7 +94,7 @@ $errorMessage = "";
                         <td><label for="title">投稿のタイトル</label></td>
                         <td>
                             <input type="text" id="title" name="title" value="<?php echo $title = $row['title'] ?>"
-                            onclick="submit('toPostShow')">
+                            onclick="submit('postShow')">
                         </td>
                     </tr>
                 </table>
@@ -102,6 +102,4 @@ $errorMessage = "";
             <p>--------------------------------------------------------------------------------</p>
         <?php endforeach ?>
     </body>
-
-
 </html>

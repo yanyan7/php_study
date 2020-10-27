@@ -80,7 +80,7 @@ if (isset($_POST["login"])) {
             <input type="submit" id="login" name="login" value="ログイン">
         </form>
         <br>
-        <form action="/user/create.php">
+        <form action="/user/new.php" method="get">
             <legend>新規登録</legend>
             <input type="submit" value="新規登録">
         </form>

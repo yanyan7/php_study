@@ -33,7 +33,7 @@ try{
     </title>
   </head>
   <body>
-    <form id="toTop" name="toTop" action="<?php echo '/post/index.php' ?>" method="post">
+    <form id="postIndex" name="postIndex" action="<?php echo '/post/index.php' ?>" method="post">
       <input type="submit" id="top" name="top" value="トップに戻る">
     </form>
 
@@ -41,11 +41,11 @@ try{
       <input type="submit" id="logout" name="logout" value="ログアウト">
     </form>
 
-    <form id="toPostCreate" name="toPostCreate" action="<?php echo '/post/create.php' ?>" method="post">
-      <input type="submit" id="create" name="create" value="投稿する">
+    <form id="postNew" name="postNew" action="<?php echo '/post/new.php' ?>" method="post">
+      <input type="submit" id="new" name="new" value="投稿する">
     </form>
 
-    <form id="toUserShow" name="toUserShow" action="<?php echo $webroot.'/user/show.php' ?>" method="post">
+    <form id="userShow" name="userShow" action="<?php echo $webroot.'/user/show.php' ?>" method="post">
       <input type="hidden" id="user_id" name="user_id" value="<?php echo $_SESSION['user'] ?>">
       <input type="text" id="name" name="name" value="<?php echo $items['name'] ?>">
     </form>

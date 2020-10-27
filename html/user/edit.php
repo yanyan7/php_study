@@ -9,26 +9,7 @@ $errorMessage = "";
 
 if( isset($_SESSION['user']) ){
 
-  if( isset($_POST['upd_user']) ){
-      // 更新ボタンが押された場合
-      $obj0 = new connect();
-
-      $sql_0 =  'UPDATE ';
-      $sql_0 .= '   user ';
-      $sql_0 .= 'set ';
-      $sql_0 .= '   name = ? ';
-      $sql_0 .= '   ,email = ? ';
-      $sql_0 .= '   ,password = ? ';
-      $sql_0 .= '   ,introduction = ? ';
-      $sql_0 .= 'WHERE ';
-      $sql_0 .=     'id = ? ';
-
-      $param_0 = array($_POST['name'], $_POST['email'], $_POST['password'], $_POST['introduction'], $_POST['user_id']);
-      $ret = $obj0->plural($sql_0, $param_0);
-  }
-
     try{
-        // 1. 投稿情報取得
         // クエリ発行
         $obj = new connect();
 
@@ -43,7 +24,7 @@ if( isset($_SESSION['user']) ){
         $sql .= 'WHERE ';
         $sql .=     'id = ? ';
 
-        $param = array($_POST['user_id']);
+        $param = array($_GET['user_id']);
         $stmt = $obj->plural($sql, $param);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -72,7 +53,7 @@ if( isset($_SESSION['user']) ){
     </head>
 
     <body>
-      <form id="updUser" name="updUser" action="" method="post">
+      <form id="userEdit" name="userEdit" action="update.php" method="post">
           <input type="hidden" id="user_id" name="user_id" value="<?php echo $row['user_id'] ?>">
 
           <p><label for="name">ユーザ名</label></p>

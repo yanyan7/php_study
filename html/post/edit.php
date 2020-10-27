@@ -9,24 +9,7 @@ $errorMessage = "";
 
 if( isset($_SESSION['user']) ){
 
-  if( isset($_POST['upd_post']) ){
-      // 更新ボタンが押された場合
-      $obj0 = new connect();
-
-      $sql_0 =  'UPDATE ';
-      $sql_0 .= '   post ';
-      $sql_0 .= 'set ';
-      $sql_0 .= '   title = ? ';
-      $sql_0 .= '   ,content = ? ';
-      $sql_0 .= 'WHERE ';
-      $sql_0 .=     'id = ? ';
-
-      $param_0 = array($_POST['title'], $_POST['content'], $_POST['post_id']);
-      $ret = $obj0->plural($sql_0, $param_0);
-  }
-
     try{
-        // 1. 投稿情報取得
         // クエリ発行
         $obj = new connect();
 
@@ -39,7 +22,7 @@ if( isset($_SESSION['user']) ){
         $sql .= 'WHERE ';
         $sql .=     'id = ? ';
 
-        $param = array($_POST['post_id']);
+        $param = array($_GET['post_id']);
         $stmt = $obj->plural($sql, $param);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -58,17 +41,10 @@ if( isset($_SESSION['user']) ){
     <head>
       <meta charset="UTF-8">
       <title>投稿編集</title>
-      <script type="text/javascript">
-        function submit(formName){
-          var target = document.getElementById(formName);
-          target.submit();
-          //alert("aa");
-        }
-      </script>
     </head>
 
     <body>
-      <form id="updPost" name="updPost" action="" method="post">
+      <form id="postEdit" name="postEdit" action="update.php" method="post">
           <p><label for="post_id">投稿ID</label></p>
           <input type="text" id="post_id" name="post_id" value="<?php echo $row['post_id'] ?>">
 
