@@ -85,7 +85,8 @@ $errorMessage = "";
         </table>
       </form>
 
-      <?php if( isset($_SESSION['user']) ): ?>
+      <?php if( isset($_SESSION['user']) && $_SESSION['user']==$row_p['user_id'] ): ?>
+        <!-- ログイン済みかつ、投稿ユーザがログインユーザと一致する場合は編集可能 -->
         <form id="postEdit" name="postEdit" action="edit.php" method="get">
           <input type="hidden" id="post_id" name="post_id" value="<?php echo $_GET['post_id'] ?>">
           <button type="button" id="edit" name="edit" onclick="submit('postEdit')">編集する</button>

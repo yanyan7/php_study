@@ -60,7 +60,8 @@ $errorMessage = "";
     </form>
 <?php endforeach ?>
 
-<?php if( isset($_SESSION['user']) ): ?>
+<?php if( isset($_SESSION['user']) && $_SESSION['user']!=$row_p['user_id'] ): ?>
+    <!-- ログイン済みかつ、投稿ユーザがログインユーザと異なる場合は投稿可能 -->
     <form id="commentNew" name="commentNew" action="../comment/create.php" method="post">
         <p>コメント投稿欄</p>
         <textarea name="comment_input" id="comment_input" cols="30" rows="10"></textarea>

@@ -53,14 +53,15 @@ try{
         <meta charset="UTF-8">
         <title>ユーザー表示</title>
         <script type="text/javascript">
-            function submit(formName){
-                var target = document.getElementById(formName);
+            function submit(formName, action){
+                let target = document.getElementById(formName);
+                target.action = action;
                 target.submit();
             }
         </script>
     </head>
     <body>
-        <form id="userShow1" name="userShow1" action="edit.php" method="get">
+        <form id="userShow1" name="userShow1" action="" method="get">
             <table>
                 <tr>
                     <td><label for="user_id">ユーザID</label></td>
@@ -83,14 +84,15 @@ try{
                     <td><textarea name="introduction" id="introduction" cols="30" rows="10"><?php echo $items[0]['introduction'] ?></textarea></td>
                 </tr>
             </table>
-            <?php if( isset($_SESSION['user']) ): ?>
-              <button type="button" id="edit" name="edit" onclick="submit('userShow1')">編集する</button>
+            <?php if( isset($_SESSION['user']) && $_SESSION['user']==$items[0]['user_id'] ): ?>
+              <!-- ログイン済みかつ、ユーザがログインユーザと一致する場合は編集可能 -->
+              <button type="button" id="edit" name="edit" onclick="submit('userShow1', 'edit.php')">編集する</button>
             <?php endif ?>
             <p>************************************************************************</p>
         </form>
 
         <?php foreach($items as $row): ?>
-            <form id="userShow2" name="userShow2" action="../post/show.php" method="get">
+            <form id="userShow2" name="userShow2" action="" method="get">
                 <table>
                     <tr>
                         <td><label for="user_id">ユーザID</label></td>
@@ -100,7 +102,7 @@ try{
                         <td><label for="name">ユーザの名前</label></td>
                         <td>
                             <input type="text" id="name" name="name" value="<?php echo $row['name'] ?>"
-                            onclick="submit('userShow2')">
+                            onclick="submit('userShow2', 'show.php')">
                         </td>
                     </tr>
                     <!--
@@ -117,7 +119,7 @@ try{
                         <td><label for="title">投稿のタイトル</label></td>
                         <td>
                             <input type="text" id="title" name="title" value="<?php echo $row['title'] ?>"
-                            onclick="submit('userShow2')">
+                            onclick="submit('userShow2', '../post/show.php')">
                         </td>
                     </tr>
                 </table>
