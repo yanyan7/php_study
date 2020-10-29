@@ -43,13 +43,6 @@ if( isset($_SESSION['user']) ){
     <head>
       <meta charset="UTF-8">
       <title>ユーザー編集</title>
-      <script type="text/javascript">
-        function submit(formName){
-          var target = document.getElementById(formName);
-          target.submit();
-          //alert("aa");
-        }
-      </script>
     </head>
 
     <body>

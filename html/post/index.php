@@ -53,13 +53,6 @@ $errorMessage = "";
     <head>
         <meta charset="UTF-8">
         <title>投稿一覧</title>
-        <script type="text/javascript">
-            function submit(formName){
-                var target = document.getElementById(formName);
-                target.submit();
-                //alert("aa");
-            }
-        </script>
     </head>
     <body>
         <?php foreach($items as $row): ?>
