@@ -1,6 +1,5 @@
 <?php
 session_start();  //セッション開始
-
 require_once '../connect.php';
 
 // エラーメッセージの初期化

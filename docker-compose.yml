@@ -16,6 +16,7 @@ services:
     image: mysql:5.7
     volumes:
       - ./mysql:/var/lib/mysql
+      - ./mysql_setting/my.cnf:/etc/mysql/my.cnf
     ports:
       - 13306:3306
     environment:
