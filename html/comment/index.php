@@ -12,6 +12,7 @@ $errorMessage = "";
       $sql_c =  'SELECT ';
       $sql_c .=     'u.id as user_id ';
       $sql_c .=     ',u.name ';
+      $sql_c .=     ',c.id as comment_id ';
       $sql_c .=     ',c.content ';
       $sql_c .= 'FROM ';
       $sql_c .=     'comment c ';
@@ -56,8 +57,18 @@ $errorMessage = "";
             </td>
         </tr>
         </table>
-        <p>---------------------------------------------------------</p>
     </form>
+
+    <?php if( isset($_SESSION['user']) && $_SESSION['user']==$row_c['user_id'] ): ?>
+        <!-- ログイン済みかつ、コメント投稿ユーザがログインユーザと一致する場合は編集可能 -->
+        <form id="commentEdit" name="commentEdit" action="../comment/edit.php" method="get">
+            <input type="hidden" id="comment_id" name="comment_id" value="<?php echo $row_c['comment_id'] ?>">
+            <input type="hidden" id="post_id" name="post_id" value="<?php echo $_GET['post_id'] ?>">
+            <button type="button" id="c_edit" name="c_edit" onclick="submit('commentEdit')">編集する</button>
+        </form>
+    <?php endif ?>
+
+    <p>---------------------------------------------------------</p>
 <?php endforeach ?>
 
 <?php if( isset($_SESSION['user']) && $_SESSION['user']!=$row_p['user_id'] ): ?>
