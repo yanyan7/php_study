@@ -71,7 +71,7 @@ $errorMessage = "";
         <form id="commentDestroy" name="commentDestroy" action="../comment/destroy.php" method="post">
             <input type="hidden" id="comment_id" name="comment_id" value="<?php echo $row_c['comment_id'] ?>">
             <input type="hidden" id="post_id" name="post_id" value="<?php echo $_GET['post_id'] ?>">
-            <button type="button" id="c_destroy" name="c_destroy" onclick="submit('commentDestroy')">削除する</button>
+            <button type="button" id="c_destroy" name="c_destroy" onclick="return confirm(commentDestroy, '削除')">削除する</button>
         </form>
     <?php endif ?>
 
@@ -83,7 +83,7 @@ $errorMessage = "";
     <form id="commentNew" name="commentNew" action="../comment/create.php" method="post">
         <p>コメント投稿欄</p>
         <textarea name="comment_input" id="comment_input" cols="30" rows="10"></textarea>
-        <input type="submit" id="ins_comment" name="ins_comment" value="投稿">
+        <input type="submit" id="ins_comment" name="ins_comment" value="投稿" onclick="return confirm(commentNew, '投稿')">
         <input type="hidden" id="post_id" name="post_id" value="<?php echo $_GET['post_id'] ?>">
     </form>
 <?php endif ?>

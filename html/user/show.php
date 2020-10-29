@@ -52,6 +52,14 @@ try{
     <head>
         <meta charset="UTF-8">
         <title>ユーザー表示</title>
+        <script type="text/javascript">
+        const confirm = () => {
+          if(!window.confirm("削除してよろしいですか?")){
+            return false;
+          }
+          document.userDestroy.submit();
+        }
+      </script>
     </head>
     <body>
         <table>
@@ -86,7 +94,7 @@ try{
 
             <form id="userDestroy" name="userDestroy" action="destroy.php" method="post">
                 <!-- ログイン済みかつ、ユーザがログインユーザと一致する場合は削除可能 -->
-                <button type="button" id="destroy" name="destroy" onclick="submit('userDestroy')">削除する</button>
+                <button type="button" id="destroy" name="destroy" onclick="return confirm()">削除する</button>
                 <input type="hidden" id="user_id" name="user_id" value="<?php echo $items[0]['user_id'] ?>">
             </form>
         <?php endif ?>

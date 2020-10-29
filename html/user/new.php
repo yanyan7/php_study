@@ -26,6 +26,13 @@ if( isset($_SESSION['user']) ){
       <style>
         .hide{display: none;}
       </style>
+      <script type="text/javascript">
+        const confirm = () => {
+          if(!window.confirm("登録してよろしいですか?")){
+            return false;
+          }
+        }
+      </script>
     </head>
 
     <body>
@@ -39,7 +46,7 @@ if( isset($_SESSION['user']) ){
             <p><label for="password">パスワード</label></p>
             <input type="password" id="password" name="password">
 
-            <p><input type="submit" id="create_user" name="create_user" value="登録"></p>
+            <p><input type="submit" id="create_user" name="create_user" value="登録" onclick="return confirm()"></p>
         </form>
     </body>
 

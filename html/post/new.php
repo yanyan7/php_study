@@ -11,6 +11,13 @@ include('../global_menu.php');
     <head>
       <meta charset="UTF-8">
       <title>投稿作成</title>
+      <script type="text/javascript">
+        const confirm = () => {
+          if(!window.confirm("投稿してよろしいですか?")){
+            return false;
+          }
+        }
+      </script>
     </head>
 
     <body>
@@ -21,7 +28,7 @@ include('../global_menu.php');
           <p><label for="content">本文</label></p>
           <textarea name="content" id="content" cols="30" rows="10"></textarea>
 
-          <p><input type="submit" id="create_post" name="create_post" value="投稿"></p>
+          <p><input type="submit" id="create_post" name="create_post" value="投稿" onclick="return confirm()"></p>
       </form>
 
     </body>

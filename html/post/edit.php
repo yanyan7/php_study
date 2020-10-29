@@ -41,6 +41,13 @@ if( isset($_SESSION['user']) ){
     <head>
       <meta charset="UTF-8">
       <title>投稿編集</title>
+      <script type="text/javascript">
+        const confirm = () => {
+          if(!window.confirm("更新してよろしいですか?")){
+            return false;
+          }
+        }
+      </script>
     </head>
 
     <body>
@@ -54,7 +61,7 @@ if( isset($_SESSION['user']) ){
           <p><label for="content">本文</label></p>
           <textarea name="content" id="content" cols="30" rows="10"><?php echo $row['content'] ?></textarea>
 
-          <p><input type="submit" id="upd_post" name="upd_post" value="更新"></p>
+          <p><input type="submit" id="upd_post" name="upd_post" value="更新" onclick="return confirm()"></p>
       </form>
 
     </body>

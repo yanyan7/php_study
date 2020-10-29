@@ -40,6 +40,13 @@ if( isset($_SESSION['user']) ){
     <head>
       <meta charset="UTF-8">
       <title>コメント編集</title>
+      <script type="text/javascript">
+        const confirm = () => {
+          if(!window.confirm("更新してよろしいですか?")){
+            return false;
+          }
+        }
+      </script>
     </head>
 
     <body>
@@ -52,7 +59,7 @@ if( isset($_SESSION['user']) ){
 
           <input type="hidden" id="post_id" name="post_id" value="<?php echo $_GET['post_id'] ?>">
 
-          <p><input type="submit" id="upd_comment" name="upd_comment" value="更新"></p>
+          <p><input type="submit" id="upd_comment" name="upd_comment" value="更新" onclick="return confirm()"></p>
       </form>
 
     </body>

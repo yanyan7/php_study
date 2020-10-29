@@ -43,6 +43,13 @@ if( isset($_SESSION['user']) ){
     <head>
       <meta charset="UTF-8">
       <title>ユーザー編集</title>
+      <script type="text/javascript">
+        const confirm = () => {
+          if(!window.confirm("更新してよろしいですか?")){
+            return false;
+          }
+        }
+      </script>
     </head>
 
     <body>
@@ -58,10 +65,10 @@ if( isset($_SESSION['user']) ){
           <p><label for="password">パスワード</label></p>
           <input type="text" id="password" name="password" value="<?php echo $row['password'] ?>">
 
-          <p><label for="introduction">パスワード</label></p>
+          <p><label for="introduction">自己紹介文</label></p>
           <textarea name="introduction" id="introduction" cols="30" rows="10"><?php echo $row['introduction'] ?></textarea>
 
-          <p><input type="submit" id="upd_user" name="upd_user" value="更新"></p>
+          <p><input type="submit" id="upd_user" name="upd_user" value="更新" onclick="return confirm()"></p>
       </form>
 
     </body>
