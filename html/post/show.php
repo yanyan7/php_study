@@ -54,7 +54,7 @@ $errorMessage = "";
     </head>
 
     <body>
-      <form id="userShow" name="userShow" action="../user/show.php" method="post">
+      <form id="userShow" name="userShow" action="../user/show.php" method="get">
         <table>
           <tr>
             <td><label for="user_id">投稿ユーザID</label></td>
@@ -83,6 +83,12 @@ $errorMessage = "";
         <form id="postEdit" name="postEdit" action="edit.php" method="get">
           <input type="hidden" id="post_id" name="post_id" value="<?php echo $_GET['post_id'] ?>">
           <button type="button" id="edit" name="edit" onclick="submit('postEdit')">編集する</button>
+        </form>
+
+        <!-- ログイン済みかつ、投稿ユーザがログインユーザと一致する場合は削除可能 -->
+        <form id="postDestroy" name="postDestroy" action="destroy.php" method="post">
+          <input type="hidden" id="post_id" name="post_id" value="<?php echo $_GET['post_id'] ?>">
+          <button type="button" id="destroy" name="destroy" onclick="submit('postDestroy')">削除する</button>
         </form>
       <?php endif ?>
 

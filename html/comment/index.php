@@ -66,6 +66,13 @@ $errorMessage = "";
             <input type="hidden" id="post_id" name="post_id" value="<?php echo $_GET['post_id'] ?>">
             <button type="button" id="c_edit" name="c_edit" onclick="submit('commentEdit')">編集する</button>
         </form>
+
+        <!-- ログイン済みかつ、コメント投稿ユーザがログインユーザと一致する場合は削除可能 -->
+        <form id="commentDestroy" name="commentDestroy" action="../comment/destroy.php" method="post">
+            <input type="hidden" id="comment_id" name="comment_id" value="<?php echo $row_c['comment_id'] ?>">
+            <input type="hidden" id="post_id" name="post_id" value="<?php echo $_GET['post_id'] ?>">
+            <button type="button" id="c_destroy" name="c_destroy" onclick="submit('commentDestroy')">削除する</button>
+        </form>
     <?php endif ?>
 
     <p>---------------------------------------------------------</p>

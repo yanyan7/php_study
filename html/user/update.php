@@ -40,7 +40,7 @@ if( isset($_POST['upd_user']) ){
     </head>
 
     <body>
-      <form id="updPost" name="updPost" action="show.php" method="post">
+      <form id="updPost" name="updPost" action="show.php" method="get">
           <input type="hidden" id="user_id" name="user_id" value="<?php echo $_POST['user_id'] ?>">
       </form>
     </body>

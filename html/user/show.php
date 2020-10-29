@@ -26,11 +26,11 @@ try{
     $sql .=     ',u.image as image ';
     $sql .=     ',u.introduction as introduction ';
     $sql .= 'FROM ';
-    $sql .=     'post p ';
-    $sql .= 'left join ';
     $sql .=     'user u ';
+    $sql .= 'left join ';
+    $sql .=     'post p ';
     $sql .=     'on ';
-    $sql .=     'p.user_id = u.id ';
+    $sql .=     ' u.id = p.user_id ';
     $sql .= 'WHERE ';
     $sql .=     'u.id = ? ';
 
@@ -54,73 +54,83 @@ try{
         <title>ユーザー表示</title>
     </head>
     <body>
-        <form id="userShow" name="userShow" action="edit.php" method="get">
-            <table>
-                <tr>
-                    <td><label for="user_id">ユーザID</label></td>
-                    <td><input type="text" id="user_id" name="user_id" value="<?php echo $items[0]['user_id'] ?>"></td>
-                </tr>
-                <tr>
-                    <td><label for="name">ユーザの名前</label></td>
-                    <td>
-                        <input type="text" id="name" name="name" value="<?php echo $items[0]['name'] ?>">
-                    </td>
-                </tr>
-                <!--
-                <tr>
-                    <td><label for="image">ユーザのイメージ</label></td>
-                    <td><input type="text" id="image" name="image" value="<?php echo $items[0]['image'] ?>"></td>
-                </tr>
-                -->
-                <tr>
-                    <td><label for="introduction">自己紹介文</label></td>
-                    <td><textarea name="introduction" id="introduction" cols="30" rows="10"><?php echo $items[0]['introduction'] ?></textarea></td>
-                </tr>
-            </table>
+        <table>
+            <tr>
+                <td><label for="user_id">ユーザID</label></td>
+                <td><input type="text" id="user_id" name="user_id" value="<?php echo $items[0]['user_id'] ?>"></td>
+            </tr>
+            <tr>
+                <td><label for="name">ユーザの名前</label></td>
+                <td>
+                    <input type="text" id="name" name="name" value="<?php echo $items[0]['name'] ?>">
+                </td>
+            </tr>
+            <!--
+            <tr>
+                <td><label for="image">ユーザのイメージ</label></td>
+                <td><input type="text" id="image" name="image" value="<?php echo $items[0]['image'] ?>"></td>
+            </tr>
+            -->
+            <tr>
+                <td><label for="introduction">自己紹介文</label></td>
+                <td><textarea name="introduction" id="introduction" cols="30" rows="10"><?php echo $items[0]['introduction'] ?></textarea></td>
+            </tr>
+        </table>
 
-            <?php if( isset($_SESSION['user']) && $_SESSION['user']==$items[0]['user_id'] ): ?>
-              <!-- ログイン済みかつ、ユーザがログインユーザと一致する場合は編集可能 -->
-              <button type="button" id="edit" name="edit" onclick="submit('userShow')">編集する</button>
-            <?php endif ?>
-
-            <p>************************************************************************</p>
-        </form>
-
-        <?php foreach($items as $row): ?>
-            <table>
-                <tr>
-                    <td><label for="user_id">ユーザID</label></td>
-                    <td><input type="text" id="user_id" name="user_id" value="<?php echo $row['user_id'] ?>"></td>
-                </tr>
-                <tr>
-                    <td><label for="name">ユーザの名前</label></td>
-                    <td>
-                        <input type="text" id="name" name="name" value="<?php echo $row['name'] ?>">
-                    </td>
-                </tr>
-                <!--
-                <tr>
-                    <td><label for="image">ユーザのイメージ</label></td>
-                    <td><input type="text" id="image" name="image" value="<?php echo $row['image'] ?>"></td>
-                </tr>
-                -->
-            <form id="postShow" name="postShow" action="../post/show.php" method="get">
-                <tr>
-                    <td><label for="post_id">投稿ID</label></td>
-                    <td><input type="text" id="post_id" name="post_id" value="<?php echo $row['post_id'] ?>"></td>
-                </tr>
-                <tr>
-                    <td><label for="title">投稿のタイトル</label></td>
-                    <td>
-                        <input type="text" id="title" name="title" value="<?php echo $row['title'] ?>"
-                        onclick="submit('postShow')">
-                    </td>
-                </tr>
-            </table>
-
-            <p>--------------------------------------------------------------------------------</p>
+        <?php if( isset($_SESSION['user']) && $_SESSION['user']==$items[0]['user_id'] ): ?>
+            <form id="userEdit" name="userEdit" action="edit.php" method="get">
+                <!-- ログイン済みかつ、ユーザがログインユーザと一致する場合は編集可能 -->
+                <button type="button" id="edit" name="edit" onclick="submit('userEdit')">編集する</button>
+                <input type="hidden" id="user_id" name="user_id" value="<?php echo $items[0]['user_id'] ?>">
             </form>
-        <?php endforeach ?>
+
+            <form id="userDestroy" name="userDestroy" action="destroy.php" method="post">
+                <!-- ログイン済みかつ、ユーザがログインユーザと一致する場合は削除可能 -->
+                <button type="button" id="destroy" name="destroy" onclick="submit('userDestroy')">削除する</button>
+                <input type="hidden" id="user_id" name="user_id" value="<?php echo $items[0]['user_id'] ?>">
+            </form>
+        <?php endif ?>
+
+        <p>************************************************************************</p>
+
+        <?php if($items[0]['post_id']): ?>
+            <!-- 投稿がある場合は表示する -->
+            <?php foreach($items as $row): ?>
+                <table>
+                    <tr>
+                        <td><label for="user_id">ユーザID</label></td>
+                        <td><input type="text" id="user_id" name="user_id" value="<?php echo $row['user_id'] ?>"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="name">ユーザの名前</label></td>
+                        <td>
+                            <input type="text" id="name" name="name" value="<?php echo $row['name'] ?>">
+                        </td>
+                    </tr>
+                    <!--
+                    <tr>
+                        <td><label for="image">ユーザのイメージ</label></td>
+                        <td><input type="text" id="image" name="image" value="<?php echo $row['image'] ?>"></td>
+                    </tr>
+                    -->
+                <form id="postShow" name="postShow" action="../post/show.php" method="get">
+                    <tr>
+                        <td><label for="post_id">投稿ID</label></td>
+                        <td><input type="text" id="post_id" name="post_id" value="<?php echo $row['post_id'] ?>"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="title">投稿のタイトル</label></td>
+                        <td>
+                            <input type="text" id="title" name="title" value="<?php echo $row['title'] ?>"
+                            onclick="submit('postShow')">
+                        </td>
+                    </tr>
+                </table>
+
+                <p>--------------------------------------------------------------------------------</p>
+                </form>
+            <?php endforeach ?>
+        <?php endif ?>
     </body>
 
 
