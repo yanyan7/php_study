@@ -6,11 +6,32 @@ require_once '../connect.php';
 // エラーメッセージの初期化
 $errorMessage = "";
 
-// エラーメッセージの初期化
-$errorMessage = "";
-
 if( isset($_POST['create_user']) ){
     // 投稿ボタンが押された場合
+
+    // //重複チェック
+    // //ユーザ名
+    // $obj_cn = new connect();
+
+    // $sql_cn =  'SELECT ';
+    // $sql_cn .= '   id as user_id ';
+    // $sql_cn .= 'FROM ';
+    // $sql_cn .= '   user ';
+    // $sql_cn .= 'WHERE ';
+    // $sql_cn .= '   name = ? ';
+
+    // $param_cn = array($_POST['name']);
+    // $stmt_cn = $obj_cn->plural($sql_cn, $param_cn);
+    // $items_cn = $stmt_cn->fetch(PDO::FETCH_ASSOC);
+
+    // if($items_cn['user_id'] != ""){ 
+    //     header("Location: new.php");  // 作成画面へ戻る
+    // }
+
+
+    // //メールアドレス
+
+
 
     // userテーブルに登録
     $obj = new connect();
