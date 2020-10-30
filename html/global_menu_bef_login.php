@@ -1,7 +1,6 @@
 <?php
 session_start();  //セッション開始
 
-//require 'password.php';   // password_verfy()はphp 5.5.0以降の関数のため、バージョンが古くて使えない場合に使用
 require_once 'connect.php';
 
 // エラーメッセージの初期化
@@ -10,31 +9,31 @@ $errorMessage = "";
 // ログインボタンが押された場合
 if (isset($_POST["login"])) {
     // メールアドレスの入力チェック
-    if (empty($_POST["email"])) {  // emptyは値が空のとき
+    if (empty($_POST["email_gb"])) {  // emptyは値が空のとき
         $errorMessage = 'メールアドレスが未入力です。';
         echo $errorMessage;
-    } else if (empty($_POST["password"])) {
+    } else if (empty($_POST["password_gb"])) {
         $errorMessage = 'パスワードが未入力です。';
         echo $errorMessage;
     }
 
-    if (!empty($_POST["email"]) && !empty($_POST["password"])) {
+    if (!empty($_POST["email_gb"]) && !empty($_POST["password_gb"])) {
         // 入力したメールアドレスを格納
-        $email = $_POST["email"];
+        $email_gb = $_POST["email_gb"];
 
         try {
             // クエリ発行
             $obj = new connect();
             $sql = 'SELECT * FROM user WHERE email = ?';
-            //$param = $email;
-            $param = array($email);
+            //$param = $email_gb;
+            $param = array($email_gb);
             $stmt = $obj->plural($sql, $param);
 
-            $password = $_POST["password"];
+            $password_gb = $_POST["password_gb"];
 
             if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                //if (password_verify($password, $row['password'])) {
-                if ($password == $row['password']) {
+                //if (password_gb_verify($password_gb, $row['password_gb'])) {
+                if ($password_gb == $row['password']) {
                     session_regenerate_id(true);
                     $_SESSION["user"] = $row['id'];
                     header("Location: /post/index.php");  // 投稿一覧画面へ遷移
@@ -73,9 +72,9 @@ if (isset($_POST["login"])) {
     <body>
         <form id="loginForm" name="loginForm" action="" method="POST">
             <legend>ログイン</legend>
-            <label for="email">メールアドレス</label><input type="text" id="email" name="email" placeholder="メールアドレスを入力" value="<?php if (!empty($_POST["email"])) {echo htmlspecialchars($_POST["email"], ENT_QUOTES);} ?>">
+            <label for="email_gb">メールアドレス</label><input type="text" id="email_gb" name="email_gb" placeholder="メールアドレスを入力" value="<?php if (!empty($_POST["email_gb"])) {echo htmlspecialchars($_POST["email_gb"], ENT_QUOTES);} ?>">
             <br>
-            <label for="password">パスワード</label><input type="password" id="password" name="password" value="" placeholder="パスワードを入力">
+            <label for="password_gb">パスワード</label><input type="password_gb" id="password_gb" name="password_gb" value="" placeholder="パスワードを入力">
             <br>
             <input type="submit" id="login" name="login" value="ログイン">
         </form>

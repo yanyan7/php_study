@@ -13,9 +13,39 @@ include('../global_menu.php');
       <title>投稿作成</title>
       <script type="text/javascript">
         const confirm = () => {
+          if(!chkTitle()){
+            alert("タイトルを入力して下さい");
+            return false;
+          }
+
+          if(!chkContent()){
+            alert("本文を入力して下さい");
+            return false;
+          }
+
           if(!window.confirm("投稿してよろしいですか?")){
             return false;
           }
+
+          return true;
+        }
+
+        //タイトル空欄チェック
+        const chkTitle = () => {
+          const obj = document.getElementById("title");
+          if(!obj.value){
+            return false;
+          }
+          return true;
+        }
+
+        //本文空欄チェック
+        const chkContent = () => {
+          const obj = document.getElementById("content");
+          if(!obj.value){
+            return false;
+          }
+          return true;
         }
       </script>
     </head>

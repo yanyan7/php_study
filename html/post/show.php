@@ -52,11 +52,35 @@ $errorMessage = "";
       <meta charset="UTF-8">
       <title>投稿表示</title>
       <script type="text/javascript">
-        const confirm = (form, message) => {
-          if(!window.confirm(`${message}してよろしいですか?`)){
+        //入力チェック(削除)
+        const confirm = (form) => {
+          if(!window.confirm("削除してよろしいですか?")){
             return false;
           }
           form.submit();
+        }
+
+        //コメント入力チェック
+        const confComNew = () => {
+          if(!chkComment()){
+            alert("コメントを入力して下さい");
+            return false;
+          }
+
+          if(!window.confirm("投稿してよろしいですか?")){
+            return false;
+          }
+
+          return true;
+        }
+
+        //コメント空欄チェック
+        const chkComment = () => {
+          const obj = document.getElementById("comment_input");
+          if(!obj.value){
+            return false;
+          }
+          return true;
         }
       </script>
     </head>
@@ -96,7 +120,7 @@ $errorMessage = "";
         <!-- ログイン済みかつ、投稿ユーザがログインユーザと一致する場合は削除可能 -->
         <form id="postDestroy" name="postDestroy" action="destroy.php" method="post">
           <input type="hidden" id="post_id" name="post_id" value="<?php echo $_GET['post_id'] ?>">
-          <button type="button" id="destroy" name="destroy" onclick="return confirm(postDestroy, '削除')">削除する</button>
+          <button type="button" id="destroy" name="destroy" onclick="return confirm(postDestroy)">削除する</button>
         </form>
       <?php endif ?>
 

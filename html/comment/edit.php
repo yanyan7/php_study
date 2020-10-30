@@ -41,10 +41,27 @@ if( isset($_SESSION['user']) ){
       <meta charset="UTF-8">
       <title>コメント編集</title>
       <script type="text/javascript">
+
         const confirm = () => {
+          if(!chkComment()){
+            alert("コメントを入力して下さい");
+            return false;
+          }
+
           if(!window.confirm("更新してよろしいですか?")){
             return false;
           }
+
+          return true;
+        }
+
+        //コメント空欄チェック
+        const chkComment = () => {
+          const obj = document.getElementById("content");
+          if(!obj.value){
+            return false;
+          }
+          return true;
         }
       </script>
     </head>

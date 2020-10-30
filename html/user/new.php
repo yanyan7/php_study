@@ -28,9 +28,53 @@ if( isset($_SESSION['user']) ){
       </style>
       <script type="text/javascript">
         const confirm = () => {
+          if(!chkName()){
+            alert("ユーザ名を入力して下さい");
+            return false;
+          }
+
+          if(!chkEmail()){
+            alert("メールアドレスを入力して下さい");
+            return false;
+          }
+
+          if(!chkPass()){
+            alert("パスワードを入力して下さい");
+            return false;
+          }
+
           if(!window.confirm("登録してよろしいですか?")){
             return false;
           }
+
+          return true;
+        }
+
+        //ユーザ名空欄チェック
+        const chkName = () => {
+          const obj = document.getElementById("name");
+          if(!obj.value){
+            return false;
+          }
+          return true;
+        }
+
+        //メールアドレス空欄チェック
+        const chkEmail = () => {
+          const obj = document.getElementById("email");
+          if(!obj.value){
+            return false;
+          }
+          return true;
+        }
+
+        //パスワード空欄チェック
+        const chkPass = () => {
+          const obj = document.getElementById("password");
+          if(!obj.value){
+            return false;
+          }
+          return true;
         }
       </script>
     </head>

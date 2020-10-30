@@ -29,8 +29,14 @@ try{
 <html>
   <head>
     <meta charset="utf-8">
-    <title>
-    </title>
+    <title></title>
+    <script type="text/javascript">
+      const confLogout = () => {
+        if(!window.confirm("ログアウトしてよろしいですか?")){
+          return false;
+        }
+      }
+    </script>
   </head>
   <body>
     <form id="postIndex" name="postIndex" action="<?php echo '/post/index.php' ?>" method="get">
@@ -38,7 +44,7 @@ try{
     </form>
 
     <form id="logout" name="logout" action="<?php echo '/post/index.php' ?>" method="post">
-      <input type="submit" id="logout" name="logout" value="ログアウト">
+      <input type="submit" id="logout" name="logout" value="ログアウト" onclick="return confLogout()">
     </form>
 
     <form id="postNew" name="postNew" action="<?php echo '/post/new.php' ?>" method="post">
