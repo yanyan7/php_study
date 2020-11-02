@@ -84,7 +84,7 @@ if (isset($_POST["login"])) {
             <legend>ログイン</legend>
             <label for="email_gb">メールアドレス</label><input type="text" id="email_gb" name="email_gb" placeholder="メールアドレスを入力" value="<?php if (!empty($_POST["email_gb"])) {echo htmlspecialchars($_POST["email_gb"], ENT_QUOTES);} ?>">
             <br>
-            <label for="password_gb">パスワード</label><input type="password_gb" id="password_gb" name="password_gb" value="" placeholder="パスワードを入力">
+            <label for="password_gb">パスワード</label><input type="password" id="password_gb" name="password_gb" value="" placeholder="パスワードを入力">
             <br>
             <input type="submit" id="login" name="login" value="ログイン">
         </form>

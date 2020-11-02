@@ -125,7 +125,7 @@ if( isset($_SESSION['user']) ){
           <input type="text" id="email" name="email" value="<?php echo $row['email'] ?>" onblur="setVal(this)" >
 
           <p><label for="password">パスワード</label></p>
-          <input type="text" id="password" name="password" value="<?php echo $row['password'] ?>" onblur="setVal(this)" >
+          <input type="password" id="password" name="password" value="" onblur="setVal(this)" >
 
           <p><label for="introduction">自己紹介文</label></p>
           <textarea name="introduction" id="introduction" cols="30" rows="10"><?php echo $row['introduction'] ?></textarea>

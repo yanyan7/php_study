@@ -3,8 +3,8 @@ session_start();  //セッション開始
 
 require_once '../connect.php';
 
-// エラーメッセージの初期化
-$errorMessage = "";
+// パスワードのハッシュ化
+$hash_pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
 if( isset($_POST['upd_user']) ){
   // 更新ボタンが押された場合
@@ -20,7 +20,7 @@ if( isset($_POST['upd_user']) ){
   $sql_0 .= 'WHERE ';
   $sql_0 .=     'id = ? ';
 
-  $param_0 = array($_POST['name'], $_POST['email'], $_POST['password'], $_POST['introduction'], $_POST['user_id']);
+  $param_0 = array($_POST['name'], $_POST['email'], $hash_pass, $_POST['introduction'], $_POST['user_id']);
   $ret = $obj0->plural($sql_0, $param_0);
 }
 
