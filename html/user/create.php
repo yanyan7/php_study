@@ -45,6 +45,10 @@ if( isset($_POST['create_user']) ){
     }
 
 
+    // パスワードのハッシュ化
+    $hash_pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+
     // userテーブルに登録
     $obj = new connect();
 
@@ -59,7 +63,7 @@ if( isset($_POST['create_user']) ){
     $sql .= '   ,NULL ';
     $sql .= ') ';
 
-    $param = array($_POST['name'], $_POST['email'], $_POST['password'], $_POST['introduction']);
+    $param = array($_POST['name'], $_POST['email'], $hash_pass, $_POST['introduction']);
     $ret = $obj->plural($sql, $param);
 
     // 登録したユーザ情報でログインする

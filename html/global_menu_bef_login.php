@@ -39,7 +39,7 @@ if (isset($_POST["login"])) {
             if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             // 該当メールアドレスあり
 
-                if ($password_gb == $row['password']) {
+                if(password_verify($password_gb, $row['password'])) {    //復号化したパスワードと比較
                 // 該当パスワードあり
 
                     session_regenerate_id(true);
