@@ -9,8 +9,8 @@ $errorMessage = "";
 if( isset($_POST['create_user']) ){
     // 投稿ボタンが押された場合
 
-    //重複チェック
-    //ユーザ名
+    // 重複チェック
+    // ユーザ名
     $obj_cn = new connect();
 
     $sql_cn =  'SELECT ';
@@ -27,7 +27,7 @@ if( isset($_POST['create_user']) ){
         exit;
     }
 
-    //メールアドレス
+    // メールアドレス
     $obj_ce = new connect();
 
     $sql_ce =  'SELECT ';
@@ -43,6 +43,13 @@ if( isset($_POST['create_user']) ){
         header("Location: new.php");  // 作成画面へ戻る
         exit;
     }
+
+
+    // 画像
+    // $image = uniqid(mt_rand(), true);//ファイル名をユニーク化
+
+
+
 
 
     // パスワードのハッシュ化

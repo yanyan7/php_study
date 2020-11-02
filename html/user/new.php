@@ -27,6 +27,7 @@ if($motoURL == $errorURL){
     <head>
       <meta charset="UTF-8">
       <title>ユーザー作成</title>
+      <link rel="stylesheet" href="/style/style.css">
       <style>
         .hide{display: none;}
       </style>
@@ -93,6 +94,9 @@ if($motoURL == $errorURL){
 
             <p><label for="password">パスワード</label></p>
             <input type="password" id="password" name="password">
+
+            <!-- <p><label for="image">画像</label></p>
+            <input type="file" id="image" name="image"> -->
 
             <p><input type="submit" id="create_user" name="create_user" value="登録" onclick="return confirm()"></p>
         </form>

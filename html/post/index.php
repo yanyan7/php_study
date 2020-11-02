@@ -53,46 +53,33 @@ $errorMessage = "";
     <head>
         <meta charset="UTF-8">
         <title>投稿一覧</title>
+        <link rel="stylesheet" href="/style/style.css">
     </head>
     <body>
         <?php foreach($items as $row): ?>
-            <form id="userShow" name="userShow" action="../user/show.php" method="get">
-                <table>
-                    <tr>
-                        <td><label for="user_id">ユーザID</label></td>
-                        <td><input type="text" id="user_id" name="user_id" value="<?php echo $user_id = $row['user_id'] ?>"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="name">ユーザの名前</label></td>
-                        <td>
-                            <input type="text" id="name" name="name" value="<?php echo $name = $row['name'] ?>"
-                            onclick="submit('userShow')">
-                        </td>
-                    </tr>
-                    <!--
-                    <tr>
-                        <td><label for="image">ユーザのイメージ</label></td>
-                        <td><input type="text" id="image" name="image" value="<?php echo $image = $row['image'] ?>"></td>
-                    </tr>
-                    -->
-                </table>
-            </form>
+
             <form id="postShow" name="postShow" action="show.php" method="get">
-                <table>
-                    <tr>
-                        <td><label for="post_id">投稿ID</label></td>
-                        <td><input type="text" id="post_id" name="post_id" value="<?php echo $post_id = $row['post_id'] ?>"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="title">投稿のタイトル</label></td>
-                        <td>
-                            <input type="text" id="title" name="title" value="<?php echo $title = $row['title'] ?>"
-                            onclick="submit('postShow')">
-                        </td>
-                    </tr>
-                </table>
+                <input type="hidden" id="post_id" name="post_id" value="<?php echo $post_id = $row['post_id'] ?>">
+
+                <input type="text" id="title" name="title" class="show-only link title font-PI-title"
+                        value="<?php echo $title = $row['title'] ?>" onclick="submit('postShow')">
             </form>
-            <p>--------------------------------------------------------------------------------</p>
+
+            <form id="userShow" name="userShow" action="../user/show.php" method="get">
+                <input type="hidden" id="user_id" name="user_id" value="<?php echo $user_id = $row['user_id'] ?>">
+
+                <p class="subtitle font-PI-subtitle">
+                    <span>&nbsp;by </span>
+                    <input type="text" id="name" name="name" class="show-only link"
+                            value="<?php echo $name = $row['name'] ?>" onclick="submit('userShow')">
+                </p>
+
+                <!-- <label for="image">ユーザのイメージ</label>
+                <input type="text" id="image" name="image" value="<?php echo $image = $row['image'] ?>"> -->
+            </form>
+
+            <hr>
+
         <?php endforeach ?>
     </body>
 </html>

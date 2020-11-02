@@ -1,0 +1,130 @@
+.show-only,
+.show-only:active {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: inherit;
+    resize: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.title {
+    font-weight: bold;
+    width: 100%;
+}
+
+.subtitle {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+
+.font-PI-title {
+    font-size: 18px;
+}
+
+.font-PI-subtitle {
+    font-size: 14px;
+}
+
+.font-PS-title {
+    font-size: 30px;
+}
+
+.font-PS-sentence {
+    font-size: 14px;
+}
+
+.space-PS-title {
+    padding-bottom: 25px;
+}
+
+.space-PS-subtitle {
+    padding-bottom: 25px;
+}
+
+.space-PS-sentence {
+    padding-bottom: 25px;
+}
+
+.btn-PS-layout {
+    display: inline-block;
+}
+
+.btn-PS-space {
+    margin-left: 40%;
+}
+
+.space-PS-subtitle {
+    padding-bottom: 25px;
+}
+
+.font-CI-sentence {
+    font-size: 14px;
+}
+
+.btn-CI-layout {
+    display: inline-block;
+}
+
+.btn-CI-space {
+    margin-left: 30%;
+}
+
+.font-US-title {
+    font-size: 30px;
+}
+
+.btn-US-layout {
+    display: inline-block;
+}
+
+.btn-US-space {
+    margin-left: 40%;
+}
+
+.menubar {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+}
+
+.menubar-item {
+    padding-right: 30px;
+}
+
+.menubar-name {
+    font-size: 28px;
+}
+
+.menubar-btn {
+    background-color: white;
+    border-style: none;
+    font-size: 16px;
+}
+
+.menubar-icon {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+
+
+.test-bordr-bold {
+    border: 2px solid;
+}
+.test-bordr-red {
+    border: 1px solid red ;
+}
+.test-bordr-blue {
+    border: 1px solid blue;
+}
+.test-bordr-green {
+    border: 1px solid green ;
+}

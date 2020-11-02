@@ -41,6 +41,7 @@ if( isset($_SESSION['user']) ){
     <head>
       <meta charset="UTF-8">
       <title>投稿編集</title>
+      <link rel="stylesheet" href="/style/style.css">
       <script type="text/javascript">
         const confirm = () => {
           if(!chkTitle()){
@@ -82,14 +83,13 @@ if( isset($_SESSION['user']) ){
 
     <body>
       <form id="postEdit" name="postEdit" action="update.php" method="post">
-          <p><label for="post_id">投稿ID</label></p>
-          <input type="text" id="post_id" name="post_id" value="<?php echo $row['post_id'] ?>">
+          <input type="hidden" id="post_id" name="post_id" value="<?php echo $row['post_id'] ?>">
 
           <p><label for="title">タイトル</label></p>
           <input type="text" id="title" name="title" value="<?php echo $row['title'] ?>">
 
           <p><label for="content">本文</label></p>
-          <textarea name="content" id="content" cols="30" rows="10"><?php echo $row['content'] ?></textarea>
+          <textarea name="content" id="content" cols="100" rows="40"><?php echo $row['content'] ?></textarea>
 
           <p><input type="submit" id="upd_post" name="upd_post" value="更新" onclick="return confirm()"></p>
       </form>

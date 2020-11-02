@@ -11,6 +11,7 @@ include('../global_menu.php');
     <head>
       <meta charset="UTF-8">
       <title>投稿作成</title>
+      <link rel="stylesheet" href="/style/style.css">
       <script type="text/javascript">
         const confirm = () => {
           if(!chkTitle()){
@@ -56,7 +57,7 @@ include('../global_menu.php');
           <input type="text" id="title" name="title">
 
           <p><label for="content">本文</label></p>
-          <textarea name="content" id="content" cols="30" rows="10"></textarea>
+          <textarea name="content" id="content" cols="100" rows="20"></textarea>
 
           <p><input type="submit" id="create_post" name="create_post" value="投稿" onclick="return confirm()"></p>
       </form>

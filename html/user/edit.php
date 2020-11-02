@@ -43,6 +43,7 @@ if( isset($_SESSION['user']) ){
     <head>
       <meta charset="UTF-8">
       <title>ユーザー編集</title>
+      <link rel="stylesheet" href="/style/style.css">
       <script type="text/javascript">
 
         //退避(PHPとJavaScriptの読込みタイミングで入力チェックが上手くかからないため)

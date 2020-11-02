@@ -39,25 +39,36 @@ try{
     </script>
   </head>
   <body>
-    <form id="postIndex" name="postIndex" action="<?php echo '/post/index.php' ?>" method="get">
-      <input type="submit" id="top" name="top" value="トップに戻る">
-    </form>
 
-    <form id="logout" name="logout" action="<?php echo '/post/index.php' ?>" method="post">
-      <input type="submit" id="logout" name="logout" value="ログアウト" onclick="return confLogout()">
-    </form>
+    <ul class="menubar">
+      <li class="menubar-item">
+        <span class="menubar-icon">ようこそ</span>
+      </li>
+      <li class="menubar-item">
+        <form id="postNew" name="postNew" action="<?php echo '/post/new.php' ?>" method="post">
+          <input type="submit" id="new" name="new" class="menubar-btn link" value="投稿する">
+        </form>
+      </li>
+      <li class="menubar-item">
+        <form id="postIndex" name="postIndex" action="<?php echo '/post/index.php' ?>" method="get">
+          <input type="submit" id="top" name="top" class="menubar-btn link" value="トップに戻る">
+        </form>
+      </li>
+      <li class="menubar-item">
+        <form id="logout" name="logout" action="<?php echo '/post/index.php' ?>" method="post">
+          <input type="submit" id="logout" name="logout" value="ログアウト" class="menubar-btn link" onclick="return confLogout()">
+        </form>
+      </li>
+      <li class="menubar-item">
+        <form id="userShow" name="userShow" action="<?php echo $webroot.'/user/show.php' ?>" method="get">
+          <input type="hidden" id="user_id" name="user_id" value="<?php echo $_SESSION['user'] ?>">
+          <input type="text" id="name" name="name" class="show-only link menubar-name"
+                  value="<?php echo $items['name'] ?>" onclick="submit('userShow')">
+        </form>
+      </li>
+    </ul>
 
-    <form id="postNew" name="postNew" action="<?php echo '/post/new.php' ?>" method="post">
-      <input type="submit" id="new" name="new" value="投稿する">
-    </form>
-
-    <form id="userShow" name="userShow" action="<?php echo $webroot.'/user/show.php' ?>" method="get">
-      <input type="hidden" id="user_id" name="user_id" value="<?php echo $_SESSION['user'] ?>">
-      <input type="text" id="name" name="name" value="<?php echo $items['name'] ?>"
-      onclick="submit('userShow')">
-    </form>
-
-    <p>***************************************************</p>
+    <hr>
 
   </body>
 </html>

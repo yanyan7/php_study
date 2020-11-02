@@ -51,6 +51,7 @@ $errorMessage = "";
     <head>
       <meta charset="UTF-8">
       <title>投稿表示</title>
+      <link rel="stylesheet" href="/style/style.css">
       <script type="text/javascript">
         //入力チェック(削除)
         const confirm = (form) => {
@@ -86,45 +87,38 @@ $errorMessage = "";
     </head>
 
     <body>
-      <form id="userShow" name="userShow" action="../user/show.php" method="get">
-        <table>
-          <tr>
-            <td><label for="user_id">投稿ユーザID</label></td>
-            <td><input type="text" id="user_id" name="user_id" value="<?php echo $row_p['user_id'] ?>"></td>
-          </tr>
-          <tr>
-            <td><label for="name">投稿ユーザ名</label></td>
-            <td>
-              <input type="text" id="name" name="name" value="<?php echo $row_p['name'] ?>"
-              onclick="submit('userShow')">
-            </td>
-          </tr>
-          <tr>
-            <td><label for="title">タイトル</label></td>
-            <td><input type="text" id="title" name="title" value="<?php echo $row_p['title'] ?>"></td>
-          </tr>
-          <tr>
-            <td><label for="content">本文</label></td>
-            <td><textarea name="content" id="content" cols="30" rows="10"><?php echo $row_p['content'] ?></textarea></td>
-          </tr>
-        </table>
-      </form>
-
       <?php if( isset($_SESSION['user']) && $_SESSION['user']==$row_p['user_id'] ): ?>
         <!-- ログイン済みかつ、投稿ユーザがログインユーザと一致する場合は編集可能 -->
-        <form id="postEdit" name="postEdit" action="edit.php" method="get">
+        <form id="postEdit" name="postEdit" action="edit.php" method="get" class="btn-PS-layout btn-PS-space">
           <input type="hidden" id="post_id" name="post_id" value="<?php echo $_GET['post_id'] ?>">
           <button type="button" id="edit" name="edit" onclick="submit('postEdit')">編集する</button>
         </form>
 
         <!-- ログイン済みかつ、投稿ユーザがログインユーザと一致する場合は削除可能 -->
-        <form id="postDestroy" name="postDestroy" action="destroy.php" method="post">
+        <form id="postDestroy" name="postDestroy" action="destroy.php" method="post" class="btn-PS-layout">
           <input type="hidden" id="post_id" name="post_id" value="<?php echo $_GET['post_id'] ?>">
           <button type="button" id="destroy" name="destroy" onclick="return confirm(postDestroy)">削除する</button>
         </form>
       <?php endif ?>
 
-      <p>****************************************************</p>
+      <form id="userShow" name="userShow" action="../user/show.php" method="get">
+        <input type="hidden" id="user_id" name="user_id" value="<?php echo $row_p['user_id'] ?>">
+       
+        <p class="subtitle space-PS-subtitle">
+          <span>@ </span>
+          <input type="text" id="name" name="name" class="show-only link"
+                  value="<?php echo $row_p['name'] ?>" onclick="submit('userShow')">
+        </p>
+
+        <input type="text" id="title" name="title" class="show-only title font-PS-title space-PS-title"
+                value="<?php echo $row_p['title'] ?>" readonly>
+        
+        <!-- <input type="text" id="content" name="content" class="show-only font-PS-sentence space-PS-sentence"
+                value="<?php echo $row_p['content'] ?>"> -->
+        <textarea name="content" id="content" cols="100" rows="20" class="show-only" readonly><?php echo $row_p['content'] ?></textarea>
+      </form>
+
+      <hr>
 
       <!-- コメント一覧 -->
       <?php include('../comment/index.php'); ?>

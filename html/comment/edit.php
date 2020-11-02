@@ -40,6 +40,7 @@ if( isset($_SESSION['user']) ){
     <head>
       <meta charset="UTF-8">
       <title>コメント編集</title>
+      <link rel="stylesheet" href="/style/style.css">
       <script type="text/javascript">
 
         const confirm = () => {
