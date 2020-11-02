@@ -8,51 +8,61 @@ $errorMessage = "";
 
 // ログインボタンが押された場合
 if (isset($_POST["login"])) {
-    // メールアドレスの入力チェック
-    if (empty($_POST["email_gb"])) {  // emptyは値が空のとき
+
+    // 入力チェック
+    if (empty($_POST["email_gb"])) {
+
         $errorMessage = 'メールアドレスが未入力です。';
         echo $errorMessage;
+
     } else if (empty($_POST["password_gb"])) {
+
         $errorMessage = 'パスワードが未入力です。';
         echo $errorMessage;
     }
 
+
+    //存在チェック
     if (!empty($_POST["email_gb"]) && !empty($_POST["password_gb"])) {
-        // 入力したメールアドレスを格納
+
         $email_gb = $_POST["email_gb"];
 
         try {
-            // クエリ発行
+            // メールアドレス検索
             $obj = new connect();
             $sql = 'SELECT * FROM user WHERE email = ?';
-            //$param = $email_gb;
             $param = array($email_gb);
             $stmt = $obj->plural($sql, $param);
 
             $password_gb = $_POST["password_gb"];
 
             if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                //if (password_gb_verify($password_gb, $row['password_gb'])) {
+            // 該当メールアドレスあり
+
                 if ($password_gb == $row['password']) {
+                // 該当パスワードあり
+
                     session_regenerate_id(true);
                     $_SESSION["user"] = $row['id'];
                     header("Location: /post/index.php");  // 投稿一覧画面へ遷移
-                    //echo "認証成功、DBにデータあり";
                     exit();  // 処理終了
+
                 } else {
-                    // 認証失敗
-                    $errorMessage = 'ユーザーIDあるいはパスワードに誤りがあります。';
+                // 該当パスワードなし
+
+                    $errorMessage = 'メールアドレスあるいはパスワードに誤りがあります。';
                     echo $errorMessage;
                 }
+
             } else {
-                // 4. 認証成功なら、セッションIDを新規に発行する
-                // 該当データなし
-                $errorMessage = 'ユーザーIDあるいはパスワードに誤りがあります。';
+            // 該当メールアドレスなし
+
+                $errorMessage = 'メールアドレスあるいはパスワードに誤りがあります。';
                 echo $errorMessage;
             }
+
         } catch (PDOException $e) {
             $errorMessage = 'データベースエラー';
-            //$errorMessage = $sql;
             // $e->getMessage() でエラー内容を参照可能（デバッグ時のみ表示）
              echo $e->getMessage();
         }

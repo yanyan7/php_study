@@ -4,16 +4,20 @@ session_start();  //セッション開始
 require_once '../connect.php';
 include('../global_menu_bef_login.php');  // 未ログインの場合表示するヘッダ
 
-// エラーメッセージの初期化
-$errorMessage = "";
-
+// ログイン済みの場合
 if( isset($_SESSION['user']) ){
-  // ログイン済みの場合
   $class = "hide";  // 入力フォームを非表示にする
   echo "既にログイン済みです";
-
 }else {
   $class = "";  // 入力フォームを表示する
+}
+
+// 重複エラー(createからの戻り)
+$motoURL = $_SERVER['HTTP_REFERER'];
+$errorURL = "http://localhost:8000/user/new.php?";
+
+if($motoURL == $errorURL){
+  echo "ユーザ名またはメールアドレスが既に登録されています";
 }
 
 ?>
