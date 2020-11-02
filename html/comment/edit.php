@@ -69,8 +69,7 @@ if( isset($_SESSION['user']) ){
 
     <body>
       <form id="commentEdit" name="commentEdit" action="update.php" method="post">
-          <p><label for="comment_id">コメントID</label></p>
-          <input type="text" id="comment_id" name="comment_id" value="<?php echo $row['comment_id'] ?>">
+          <input type="hidden" id="comment_id" name="comment_id" value="<?php echo $row['comment_id'] ?>">
 
           <p><label for="content">コメント</label></p>
           <textarea name="content" id="content" cols="30" rows="10"><?php echo $row['content'] ?></textarea>

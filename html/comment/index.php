@@ -57,7 +57,7 @@ $errorMessage = "";
         </form>
     <?php endif ?>
 
-    <form id="userShow" name="userShow" action="../user/show.php" method="get">
+    <form id="userShow" name="userShow" action="../user/show.php" method="get" class="form-CI">
         <input type="hidden" id="user_id" name="user_id" value="<?php echo $row_c['user_id'] ?>">
 
         <p class="subtitle">
@@ -68,29 +68,10 @@ $errorMessage = "";
 
         <input type="text" id="content" name="content" class="show-only font-CI-sentence"
                 value="<?php echo $row_c['content'] ?>">
-
-        <hr>
-
-        <!-- <table>
-            <tr>
-                <td><label for="user_id">コメント投稿ユーザID</label></td>
-                <td><input type="text" id="user_id" name="user_id" value="<?php echo $row_c['user_id'] ?>"></td>
-            </tr>
-            <tr>
-                <td><label for="name">コメント投稿ユーザ名</label></td>
-                <td>
-                <input type="text" id="name" name="name" value="<?php echo $row_c['name'] ?>"
-                onclick="submit('userShow')">
-                </td>
-            </tr>
-            <tr>
-                <td><label for="content">コメント</label></td>
-                <td>
-                <textarea name="content" id="content" cols="30" rows="10"><?php echo $row_c['content'] ?></textarea>
-                </td>
-            </tr>
-        </table> -->
     </form>
+
+    <hr>
+
 <?php endforeach ?>
 
 <?php if( isset($_SESSION['user']) && $_SESSION['user']!=$row_p['user_id'] ): ?>

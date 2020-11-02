@@ -23,6 +23,13 @@
     margin-bottom: 0;
 }
 
+.form-PI-1 {
+    margin-top: 20px;
+}
+
+.form-PI-2 {
+    margin-bottom: 20px;
+}
 
 .font-PI-title {
     font-size: 18px;
@@ -62,6 +69,10 @@
 
 .space-PS-subtitle {
     padding-bottom: 25px;
+}
+
+.form-CI {
+    margin-bottom: 30px;
 }
 
 .font-CI-sentence {
@@ -112,6 +123,10 @@
 .menubar-icon {
     font-size: 26px;
     font-weight: bold;
+}
+
+.hr-menu {
+    margin-bottom: 30px;
 }
 
 

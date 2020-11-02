@@ -68,7 +68,7 @@ try{
       </li>
     </ul>
 
-    <hr>
+    <hr class="hr-menu">
 
   </body>
 </html>

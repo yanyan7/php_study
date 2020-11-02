@@ -58,14 +58,14 @@ $errorMessage = "";
     <body>
         <?php foreach($items as $row): ?>
 
-            <form id="postShow" name="postShow" action="show.php" method="get">
+            <form id="postShow" name="postShow" action="show.php" method="get" class="form-PI-1">
                 <input type="hidden" id="post_id" name="post_id" value="<?php echo $post_id = $row['post_id'] ?>">
 
                 <input type="text" id="title" name="title" class="show-only link title font-PI-title"
                         value="<?php echo $title = $row['title'] ?>" onclick="submit('postShow')">
             </form>
 
-            <form id="userShow" name="userShow" action="../user/show.php" method="get">
+            <form id="userShow" name="userShow" action="../user/show.php" method="get" class="form-PI-2">
                 <input type="hidden" id="user_id" name="user_id" value="<?php echo $user_id = $row['user_id'] ?>">
 
                 <p class="subtitle font-PI-subtitle">
