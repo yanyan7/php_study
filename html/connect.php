@@ -1,6 +1,6 @@
 <?php
 
-class connect{
+class Connect{
     //定数の宣言
     const DB_NAME='study_db';
     const HOST='mysql';
@@ -9,7 +9,7 @@ class connect{
     const PASS='Sakurai@0329';
 
     //データベースに接続する関数
-    function Pdo(){
+    function pdo(){
         /*phpのバージョンが5.3.6よりも古い場合はcharset=".self::UTFが必要無くなり、array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES '.SELF::UTF')が必要になり、5.3.6以上の場合は必要ないがcharset=".self::UTFは必要になる。*/
         $dsn="mysql:dbname=".self::DB_NAME.";host=".self::HOST.";charset=".self::UTF;
         $user=self::USER;
@@ -22,6 +22,7 @@ class connect{
         }
         //エラーを表示してくれる。
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+
         return $pdo;
     }
 
